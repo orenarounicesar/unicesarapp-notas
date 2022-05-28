@@ -17,4 +17,12 @@ public class AsignaturaService {
         return asignaturaRepository.getAsignaturasDocente(codigoDocente);
     }
 
+    public Asignatura getAsignatura(int codigoAsignatura) {
+        return asignaturaRepository.getAsignatura(codigoAsignatura);
+    }
+    
+    public List<Asignatura> getAsignaturas() {
+        return asignaturaRepository.getAsignaturas();
+    }
+
 }

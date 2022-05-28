@@ -25,4 +25,24 @@ public class AsignaturaRepository {
             codigoDocente
         );
     }
+
+    public Asignatura getAsignatura(int codigoAsignatura) {
+        return plantilla.queryForObject(
+            "SELECT "
+                + "a.codigo_asignatura, a.nombre_asignatura "
+            + "FROM asignaturas a "
+            + "WHERE a.codigo_asignatura = ?", 
+            (rs, rowNum) -> new Asignatura(rs.getInt("codigo_asignatura"), rs.getString("nombre_asignatura")),
+            codigoAsignatura
+        );
+    }
+
+    public List<Asignatura> getAsignaturas() {
+        return plantilla.query(
+            "SELECT "
+                + "a.codigo_asignatura, a.nombre_asignatura "
+            + "FROM asignaturas a ", 
+            (rs, rowNum) -> new Asignatura(rs.getInt("codigo_asignatura"), rs.getString("nombre_asignatura"))
+        );
+    }
 }

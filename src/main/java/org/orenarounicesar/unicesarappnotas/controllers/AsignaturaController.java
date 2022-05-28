@@ -17,8 +17,18 @@ public class AsignaturaController {
     @Autowired
     private AsignaturaService asignaturaService;
 
-    @GetMapping()
+    @GetMapping("/docente")
     public List<Asignatura> getAsignaturasDocente(@RequestParam("codigoDocente") int codigoDocente) {
         return asignaturaService.getAsignaturasDocente(codigoDocente);
+    }
+
+    @GetMapping("/id")
+    public Asignatura getAsignatura(@RequestParam("codigoAsignatura") int codigoAsignatura) {
+        return asignaturaService.getAsignatura(codigoAsignatura);
+    }
+
+    @GetMapping()
+    public List<Asignatura> getAsignaturas() {
+        return asignaturaService.getAsignaturas();
     }
 }
