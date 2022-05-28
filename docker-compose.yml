@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  db:
+    container_name: unicesarappdb-notas-db
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=unicesarappdb
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3320:3306'
+    volumes:
+      - db:/var/lib/mysql
+      - ./database/unicesarappdb.sql:/docker-entrypoint-initdb.d/init.sql
+  api:
+    container_name: unicesarappdb-notas-api
+    image: openjdk:17-alpine
+    depends_on:
+      - db
+    ports:
+      - 3100:3100
+    environment:
+      HOST: db
+      PORT: 3306
+      USER: root
+      PASSWORD: root
+    links:
+      - db
+    volumes:
+      - ./ms:/opt/ms
+    entrypoint: 
+      ["/opt/openjdk-17/bin/java", "-jar", "/opt/ms/unicesarapp-notas-0.0.1.jar", "--logging.file.name=/opt/ms/unicesarapp-notas-0.0.1.log"]
+volumes:
+  db:
+    driver: local
