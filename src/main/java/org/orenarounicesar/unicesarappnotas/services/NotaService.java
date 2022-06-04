@@ -26,4 +26,16 @@ public class NotaService {
     public int agregarNota(NotaDatos notaDatos) {
         return notaRepository.agregarNota(notaDatos);
     }
+
+    public boolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return notaRepository.isNotaAlmacenada(codigoEstudianteAsignatura, codigoCorte);
+    }
+
+    public boolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return notaRepository.isNotaPublicada(codigoEstudianteAsignatura, codigoCorte);
+    }
+
+    public int publicarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+        return notaRepository.publicarNota(codigoEstudianteAsignatura, codigoCorte);
+    }
 }

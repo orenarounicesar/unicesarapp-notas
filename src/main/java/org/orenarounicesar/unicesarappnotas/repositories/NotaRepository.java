@@ -66,4 +66,34 @@ public class NotaRepository {
             notaDatos.getNota()
         );
     }
+
+    public boolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return plantilla.queryForObject(
+            "SELECT COUNT(*) AS cantidad "
+                + "FROM notas a "
+                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+            Boolean.class,
+            new Object[]{codigoEstudianteAsignatura, codigoCorte}
+        );
+    }
+
+    public boolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return plantilla.queryForObject(
+            "SELECT a.publicada "
+                + "FROM notas a "
+                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+            Boolean.class,
+            new Object[]{codigoEstudianteAsignatura, codigoCorte}
+        );
+    }
+
+    public int publicarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+        return plantilla.update(
+            "UPDATE notas a "
+                + "SET a.publicada = 1 "
+                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+            codigoEstudianteAsignatura,
+            codigoCorte
+        );
+    }
 }

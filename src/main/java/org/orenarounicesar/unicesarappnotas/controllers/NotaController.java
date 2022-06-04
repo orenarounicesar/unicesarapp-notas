@@ -26,6 +26,16 @@ public class NotaController {
         return notaService.getNotasAsignatura(codigoAsignatura, codigoCorte);
     }
 
+    @GetMapping("/almacenada")
+    public boolean isNotaAlmacenada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+        return notaService.isNotaAlmacenada(codigoEstudianteAsignatura, codigoCorte);
+    }
+
+    @GetMapping("/publicada")
+    public boolean isNotaPublicada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+        return notaService.isNotaPublicada(codigoEstudianteAsignatura, codigoCorte);
+    }
+
     @DeleteMapping
     public int borrarNota(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
         return notaService.borrarNota(codigoEstudianteAsignatura, codigoCorte);
@@ -34,5 +44,10 @@ public class NotaController {
     @PostMapping
     public int agregarNota(@RequestBody NotaDatos notaDatos) {
         return notaService.agregarNota(notaDatos);
+    }
+
+    @PostMapping("/publicar")
+    public int publicarNota(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+        return notaService.publicarNota(codigoEstudianteAsignatura, codigoCorte);
     }
 }
