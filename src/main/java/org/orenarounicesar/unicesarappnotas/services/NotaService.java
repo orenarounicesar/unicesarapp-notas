@@ -35,7 +35,7 @@ public class NotaService {
         return notaRepository.isNotaPublicada(codigoEstudianteAsignatura, codigoCorte);
     }
 
-    public int publicarNota(int codigoEstudianteAsignatura, int codigoCorte) {
-        return notaRepository.publicarNota(codigoEstudianteAsignatura, codigoCorte);
+    public int publicarNota(NotaDatos notaDatos) {
+        return notaRepository.publicarNota(notaDatos);
     }
 }

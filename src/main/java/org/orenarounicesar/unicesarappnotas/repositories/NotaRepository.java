@@ -87,13 +87,24 @@ public class NotaRepository {
         );
     }
 
-    public int publicarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+    // public int publicarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+    //     return plantilla.update(
+    //         "UPDATE notas a "
+    //             + "SET a.publicada = 1 "
+    //             + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+    //         codigoEstudianteAsignatura,
+    //         codigoCorte
+    //     );
+    // }
+
+
+    public int publicarNota(NotaDatos notaDatos) {
         return plantilla.update(
             "UPDATE notas a "
                 + "SET a.publicada = 1 "
                 + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
-            codigoEstudianteAsignatura,
-            codigoCorte
+            notaDatos.getCodigoEstudianteAsignatura(),
+            notaDatos.getCodigoCorte()
         );
     }
 }
