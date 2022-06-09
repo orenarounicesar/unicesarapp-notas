@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
+import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -42,48 +44,56 @@ public class NotaRepository {
         );
     }
 
-    public int borrarNota(int codigoEstudianteAsignatura, int codigoCorte) {
-        return plantilla.update(
-            "DELETE FROM notas "
-            + "WHERE codigo_estudiante_asignatura = ? AND codigo_corte = ?", 
-            codigoEstudianteAsignatura,
-            codigoCorte
+    public ResponseInt borrarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+        return new ResponseInt(
+            plantilla.update(
+                "DELETE FROM notas "
+                + "WHERE codigo_estudiante_asignatura = ? AND codigo_corte = ?", 
+                codigoEstudianteAsignatura,
+                codigoCorte
+            )
         );
     }
 
-    public int agregarNota(NotaDatos notaDatos) {
-        return plantilla.update(
-            "INSERT INTO notas ("
-                + "codigo_estudiante_asignatura, "
-                + "codigo_corte, "
-                + "nota"
-            + ") VALUES (?, ?, ?) " 
-            + "ON DUPLICATE KEY UPDATE "
-                + "nota = ?", 
-            notaDatos.getCodigoEstudianteAsignatura(),
-            notaDatos.getCodigoCorte(),
-            notaDatos.getNota(),
-            notaDatos.getNota()
+    public ResponseInt agregarNota(NotaDatos notaDatos) {
+        return new ResponseInt(
+            plantilla.update(
+                "INSERT INTO notas ("
+                    + "codigo_estudiante_asignatura, "
+                    + "codigo_corte, "
+                    + "nota"
+                + ") VALUES (?, ?, ?) " 
+                + "ON DUPLICATE KEY UPDATE "
+                    + "nota = ?", 
+                notaDatos.getCodigoEstudianteAsignatura(),
+                notaDatos.getCodigoCorte(),
+                notaDatos.getNota(),
+                notaDatos.getNota()
+            )
         );
     }
 
-    public boolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
-        return plantilla.queryForObject(
-            "SELECT COUNT(*) AS cantidad "
-                + "FROM notas a "
-                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
-            Boolean.class,
-            new Object[]{codigoEstudianteAsignatura, codigoCorte}
+    public ResponseBoolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return new ResponseBoolean(
+            plantilla.queryForObject(
+                "SELECT COUNT(*) AS cantidad "
+                    + "FROM notas a "
+                    + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+                Boolean.class,
+                new Object[]{codigoEstudianteAsignatura, codigoCorte}
+            )
         );
     }
 
-    public boolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
-        return plantilla.queryForObject(
-            "SELECT a.publicada "
-                + "FROM notas a "
-                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
-            Boolean.class,
-            new Object[]{codigoEstudianteAsignatura, codigoCorte}
+    public ResponseBoolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
+        return new ResponseBoolean(
+            plantilla.queryForObject(
+                "SELECT a.publicada "
+                    + "FROM notas a "
+                    + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+                Boolean.class,
+                new Object[]{codigoEstudianteAsignatura, codigoCorte}
+            )
         );
     }
 
@@ -98,13 +108,15 @@ public class NotaRepository {
     // }
 
 
-    public int publicarNota(NotaDatos notaDatos) {
-        return plantilla.update(
-            "UPDATE notas a "
-                + "SET a.publicada = 1 "
-                + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
-            notaDatos.getCodigoEstudianteAsignatura(),
-            notaDatos.getCodigoCorte()
+    public ResponseInt publicarNota(NotaDatos notaDatos) {
+        return new ResponseInt(
+            plantilla.update(
+                "UPDATE notas a "
+                    + "SET a.publicada = 1 "
+                    + "WHERE a.codigo_estudiante_asignatura = ? AND a.codigo_corte = ?", 
+                notaDatos.getCodigoEstudianteAsignatura(),
+                notaDatos.getCodigoCorte()
+            )
         );
     }
 }

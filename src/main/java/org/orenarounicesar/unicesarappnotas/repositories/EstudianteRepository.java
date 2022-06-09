@@ -1,6 +1,7 @@
 package org.orenarounicesar.unicesarappnotas.repositories;
 
 import org.orenarounicesar.unicesarappnotas.models.Estudiante;
+import org.orenarounicesar.unicesarappnotas.models.ResponseString;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -53,5 +54,18 @@ public class EstudianteRepository {
         } catch (EmptyResultDataAccessException e) {
             return new Estudiante();
         }
+    }
+
+    public ResponseString getEmailEstudiante(int codigoEstudianteAsignatura) {
+        return 
+            plantilla.queryForObject(
+                "SELECT a.email "
+                + "FROM datos_personales a "
+                + "INNER JOIN estudiantes b ON b.codigo_dato_personal = a.codigo_dato_personal "
+                + "INNER JOIN estudiantes_asignaturas c ON c.codigo_estudiante = b.codigo_estudiante AND c.codigo_estudiante_asignatura = ? " 
+                + "LIMIT 1", 
+                (rs, rowNum) -> new ResponseString(rs.getString("email")),
+                codigoEstudianteAsignatura
+            );
     }
 }

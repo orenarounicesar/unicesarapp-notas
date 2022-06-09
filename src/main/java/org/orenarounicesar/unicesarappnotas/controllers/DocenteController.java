@@ -1,5 +1,6 @@
 package org.orenarounicesar.unicesarappnotas.controllers;
 
+import org.orenarounicesar.unicesarappnotas.models.ResponseString;
 import org.orenarounicesar.unicesarappnotas.services.DocenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class DocenteController {
     private DocenteService docenteService;
 
     @GetMapping()
-    public String getDocente(@RequestParam("codigoDocente") int codigoDocente) {
+    public ResponseString getDocente(@RequestParam("codigoDocente") int codigoDocente) {
         return docenteService.getNombreDocente(codigoDocente);
     }
 

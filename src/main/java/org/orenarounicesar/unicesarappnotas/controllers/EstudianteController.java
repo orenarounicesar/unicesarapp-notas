@@ -1,6 +1,7 @@
 package org.orenarounicesar.unicesarappnotas.controllers;
 
 import org.orenarounicesar.unicesarappnotas.models.Estudiante;
+import org.orenarounicesar.unicesarappnotas.models.ResponseString;
 import org.orenarounicesar.unicesarappnotas.services.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,5 +19,10 @@ public class EstudianteController {
     @GetMapping()
     public Estudiante getEstudiante(@RequestParam("codigoEstudiante") int codigoEstudiante) {
         return estudianteService.getEstudiante(codigoEstudiante);
+    }
+
+    @GetMapping("/email")
+    public ResponseString getEmailEstudiante(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura) {
+        return estudianteService.getEmailEstudiante(codigoEstudianteAsignatura);
     }
 }

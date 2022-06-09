@@ -5,6 +5,8 @@ import java.util.List;
 import org.orenarounicesar.unicesarappnotas.repositories.NotaRepository;
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
+import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +21,23 @@ public class NotaService {
         return notaRepository.getNotasAsignatura(codigoAsignatura, codigoCorte);
     }
     
-    public int borrarNota(int codigoEstudianteAsignatura, int codigoCorte) {
+    public ResponseInt borrarNota(int codigoEstudianteAsignatura, int codigoCorte) {
         return notaRepository.borrarNota(codigoEstudianteAsignatura, codigoCorte);
     }
 
-    public int agregarNota(NotaDatos notaDatos) {
+    public ResponseInt agregarNota(NotaDatos notaDatos) {
         return notaRepository.agregarNota(notaDatos);
     }
 
-    public boolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
+    public ResponseBoolean isNotaAlmacenada(int codigoEstudianteAsignatura, int codigoCorte) {
         return notaRepository.isNotaAlmacenada(codigoEstudianteAsignatura, codigoCorte);
     }
 
-    public boolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
+    public ResponseBoolean isNotaPublicada(int codigoEstudianteAsignatura, int codigoCorte) {
         return notaRepository.isNotaPublicada(codigoEstudianteAsignatura, codigoCorte);
     }
 
-    public int publicarNota(NotaDatos notaDatos) {
+    public ResponseInt publicarNota(NotaDatos notaDatos) {
         return notaRepository.publicarNota(notaDatos);
     }
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
+import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.orenarounicesar.unicesarappnotas.services.NotaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,27 +30,27 @@ public class NotaController {
     }
 
     @GetMapping("/almacenada")
-    public boolean isNotaAlmacenada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+    public ResponseBoolean isNotaAlmacenada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
         return notaService.isNotaAlmacenada(codigoEstudianteAsignatura, codigoCorte);
     }
 
     @GetMapping("/publicada")
-    public boolean isNotaPublicada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+    public ResponseBoolean isNotaPublicada(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
         return notaService.isNotaPublicada(codigoEstudianteAsignatura, codigoCorte);
     }
 
     @DeleteMapping
-    public int borrarNota(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
+    public ResponseInt borrarNota(@RequestParam("codigoEstudianteAsignatura") int codigoEstudianteAsignatura, @RequestParam("codigoCorte") int codigoCorte) {
         return notaService.borrarNota(codigoEstudianteAsignatura, codigoCorte);
     }
 
     @PostMapping
-    public int agregarNota(@RequestBody NotaDatos notaDatos) {
+    public ResponseInt agregarNota(@RequestBody NotaDatos notaDatos) {
         return notaService.agregarNota(notaDatos);
     }
 
     @PutMapping("/publicar")
-    public int publicarNota(@RequestBody NotaDatos notaDatos) {
+    public ResponseInt publicarNota(@RequestBody NotaDatos notaDatos) {
         return notaService.publicarNota(notaDatos);
     }
 }
