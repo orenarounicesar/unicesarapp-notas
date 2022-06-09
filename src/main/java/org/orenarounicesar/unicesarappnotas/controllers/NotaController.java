@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.NotaEstudiante;
 import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
 import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.orenarounicesar.unicesarappnotas.services.NotaService;
@@ -52,5 +53,10 @@ public class NotaController {
     @PutMapping("/publicar")
     public ResponseInt publicarNota(@RequestBody NotaDatos notaDatos) {
         return notaService.publicarNota(notaDatos);
+    }
+
+    @GetMapping("/notaestudiante")
+    public List<NotaEstudiante> getNotasAsignatura(@RequestParam("codigoEstudiante") int codigoEstudiante) {
+        return notaService.getNotaEstudiante(codigoEstudiante);
     }
 }

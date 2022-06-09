@@ -5,6 +5,7 @@ import java.util.List;
 import org.orenarounicesar.unicesarappnotas.repositories.NotaRepository;
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.NotaEstudiante;
 import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
 import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,9 @@ public class NotaService {
 
     public ResponseInt publicarNota(NotaDatos notaDatos) {
         return notaRepository.publicarNota(notaDatos);
+    }
+
+    public List<NotaEstudiante> getNotaEstudiante(int codigoEstudiante) {
+        return notaRepository.getNotaEstudiante(codigoEstudiante);
     }
 }

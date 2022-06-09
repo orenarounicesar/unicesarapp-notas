@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.orenarounicesar.unicesarappnotas.models.Nota;
 import org.orenarounicesar.unicesarappnotas.models.NotaDatos;
+import org.orenarounicesar.unicesarappnotas.models.NotaEstudiante;
 import org.orenarounicesar.unicesarappnotas.models.ResponseBoolean;
 import org.orenarounicesar.unicesarappnotas.models.ResponseInt;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -117,6 +118,26 @@ public class NotaRepository {
                 notaDatos.getCodigoEstudianteAsignatura(),
                 notaDatos.getCodigoCorte()
             )
+        );
+    }
+
+    public List<NotaEstudiante> getNotaEstudiante(int codigoEstudiante) {
+        return plantilla.query(
+            "SELECT "
+                + "c.codigo_estudiante_asignatura, e.nombre_corte, a.codigo_asignatura, a.nombre_asignatura, d.nota "
+            + "FROM asignaturas a "
+            + "INNER JOIN docentes_asignaturas b ON b.codigo_asignatura = a.codigo_asignatura "
+            + "INNER JOIN estudiantes_asignaturas c ON c.codigo_asignatura = a.codigo_asignatura AND c.codigo_estudiante = ? "
+            + "INNER JOIN notas d ON d.codigo_estudiante_asignatura = c.codigo_estudiante_asignatura AND d.publicada = 1 "
+            + "INNER JOIN cortes e ON e.codigo_corte = d.codigo_corte", 
+            (rs, rowNum) -> new NotaEstudiante(
+                rs.getInt("codigo_estudiante_asignatura"), 
+                rs.getString("nombre_corte"), 
+                rs.getInt("codigo_asignatura"), 
+                rs.getString("nombre_asignatura"), 
+                rs.getFloat("nota")
+            ),
+            codigoEstudiante
         );
     }
 }
