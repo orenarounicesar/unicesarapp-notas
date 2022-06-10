@@ -20,7 +20,7 @@ public class EstudianteRepository {
             return plantilla.queryForObject(
                 "SELECT "
                     + "a.codigo_estudiante, "
-                    + "a.codigo_estudiante, "
+                    + "a.codigo_universitario, "
                     + "b.tipo_id, "
                     + "b.id, "
                     + "b.nombre1, "
@@ -33,11 +33,12 @@ public class EstudianteRepository {
                     + "b.email "
                 + "FROM estudiantes a " 
                 + "INNER JOIN datos_personales b ON b.codigo_dato_personal = a.codigo_dato_personal " 
-                + "WHERE a.codigo_estudiante = ? " 
+                + "INNER JOIN estudiantes_asignaturas c ON c.codigo_estudiante = a.codigo_estudiante AND c.codigo_estudiante_asignatura = ? " 
+                // + "WHERE a.codigo_estudiante = ? " 
                 + "LIMIT 1", 
                 (rs, rowNum) -> new Estudiante(
                     rs.getInt("codigo_estudiante"), 
-                    rs.getString("codigo_estudiante"), 
+                    rs.getString("codigo_universitario"), 
                     rs.getString("tipo_id"), 
                     rs.getString("id"), 
                     rs.getString("nombre1"), 
