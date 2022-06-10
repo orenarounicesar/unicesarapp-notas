@@ -36,7 +36,7 @@ public class UsuarioRepository {
                 new Object[]{login, password}
             );
         } catch (EmptyResultDataAccessException e) {
-            return new Usuario();
+            return new Usuario(0, "", "", 0, 0);
         }
     }
 }
