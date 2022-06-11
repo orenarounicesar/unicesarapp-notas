@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : Develop
+ Source Server         : localhost
  Source Server Type    : MySQL
  Source Server Version : 80025
- Source Host           : claro.aprehsiltda.com:3308
+ Source Host           : localhost:3306
  Source Schema         : unicesarappdb
 
  Target Server Type    : MySQL
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 28/05/2022 01:25:04
+ Date: 10/06/2022 16:20:50
 */
 
 SET NAMES utf8mb4;
@@ -141,7 +141,7 @@ INSERT INTO `datos_personales` VALUES (16, 'CC', '10645672341', 'ANTONELA', NULL
 INSERT INTO `datos_personales` VALUES (17, 'CC', '1065677890', 'MARIA ', 'CELESTE ', 'BONILLA ', 'BONILLA', '1992-04-01', 'CALLE 56 # 54-12', '3215673211', 'orenaro@gmail.com');
 INSERT INTO `datos_personales` VALUES (18, 'CC', '1067324991', 'ANDRES', NULL, 'MAESTRE ', 'SANCHEZ', '1985-07-09', 'TRANSV 4 CASA 21-21 ', '3224538900', 'orenaro@gmail.com');
 INSERT INTO `datos_personales` VALUES (19, 'CC', '10645327785', 'WILSON', 'DARIO ', 'RESTREPO ', 'GONZALEZ', '1970-12-12', 'CALLE 72 #21-45', '3149807751', 'orenaro@gmail.com');
-INSERT INTO `datos_personales` VALUES (20, 'CC', '10674560901', 'GERMAN ', 'JOSE ', 'MARTINEZ', 'GARCIA ', '1995-09-07', 'CRA 4 # 56-78', '3214408976', 'german.martinez@unicesar.edu.co');
+INSERT INTO `datos_personales` VALUES (20, 'CC', '10674560901', 'GERMAN ', 'JOSE ', 'MARTINEZ', 'GARCIA ', '1995-09-07', 'CRA 4 # 56-78', '3214408976', 'orenaro@gmail.com');
 COMMIT;
 
 -- ----------------------------
@@ -295,7 +295,7 @@ CREATE TABLE `notas` (
   UNIQUE KEY `codigo_estudiante_asignatura` (`codigo_estudiante_asignatura`,`codigo_corte`),
   KEY `nota` (`nota`),
   KEY `publicada` (`publicada`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 -- ----------------------------
 -- Records of notas
@@ -308,9 +308,12 @@ INSERT INTO `notas` VALUES (10, 16, 1, 4, b'0');
 INSERT INTO `notas` VALUES (12, 21, 1, 4, b'0');
 INSERT INTO `notas` VALUES (16, 2, 1, 2.5, b'1');
 INSERT INTO `notas` VALUES (17, 4, 1, 4.6, b'1');
-INSERT INTO `notas` VALUES (18, 10, 1, 3.5, b'0');
+INSERT INTO `notas` VALUES (18, 10, 1, 4.2, b'0');
 INSERT INTO `notas` VALUES (23, 5, 1, 2.5, b'0');
 INSERT INTO `notas` VALUES (24, 19, 1, 3.5, b'0');
+INSERT INTO `notas` VALUES (25, 22, 1, 4.1, b'0');
+INSERT INTO `notas` VALUES (26, 9, 1, 4, b'0');
+INSERT INTO `notas` VALUES (27, 15, 1, 4.5, b'0');
 COMMIT;
 
 -- ----------------------------

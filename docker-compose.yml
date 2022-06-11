@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   db:
-    container_name: unicesarappdb-notas-db
+    container_name: unicesarapp_notas_db
     image: mysql:8.0
     cap_add:
       - SYS_NICE
@@ -15,7 +15,7 @@ services:
       - db:/var/lib/mysql
       - ./database/unicesarappdb.sql:/docker-entrypoint-initdb.d/init.sql
   api:
-    container_name: unicesarappdb-notas-api
+    container_name: unicesarapp_notas_api
     image: openjdk:17-alpine
     depends_on:
       - db

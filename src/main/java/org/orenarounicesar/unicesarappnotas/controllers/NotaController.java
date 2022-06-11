@@ -56,7 +56,7 @@ public class NotaController {
     }
 
     @GetMapping("/notaestudiante")
-    public List<NotaEstudiante> getNotasAsignatura(@RequestParam("codigoEstudiante") int codigoEstudiante) {
+    public List<NotaEstudiante> getNotaEstudiante(@RequestParam("codigoEstudiante") int codigoEstudiante) {
         return notaService.getNotaEstudiante(codigoEstudiante);
     }
 }
