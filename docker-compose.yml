@@ -31,7 +31,25 @@ services:
     volumes:
       - ./ms:/opt/ms
     entrypoint: 
-      ["/opt/openjdk-17/bin/java", "-jar", "/opt/ms/unicesarapp-notas-0.0.1.jar", "--logging.file.name=/opt/ms/unicesarapp-notas-0.0.1.log"]
+      ["/opt/openjdk-17/bin/java", "-jar", "/opt/ms/unicesarapp-notas-0.0.1.jar", "--logging.file.name=/opt/ms/unicesarapp-notas-container1.log"]
+  api1:
+    container_name: unicesarapp_notas_api1
+    image: openjdk:17-alpine
+    depends_on:
+      - db
+    ports:
+      - 3102:3100
+    environment:
+      HOST: db
+      PORT: 3306
+      USER: root
+      PASSWORD: root
+    links:
+      - db
+    volumes:
+      - ./ms:/opt/ms
+    entrypoint: 
+      ["/opt/openjdk-17/bin/java", "-jar", "/opt/ms/unicesarapp-notas-0.0.1.jar", "--logging.file.name=/opt/ms/unicesarapp-notas-container2.log"]
 volumes:
   db:
     driver: local
